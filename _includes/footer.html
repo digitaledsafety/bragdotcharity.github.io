@@ -3,10 +3,11 @@
       <div class="align-items-end gy-4 mb-5 row">
         <div class="col-lg-6 col-xl-5">
           <h2 class="fw-bold h4 mb-3 text-white">Join the movement, stay updated</h2>
-          <form id="newsletter-form" action="https://formspree.io/f/xeqdoyjj" method="POST"> 
+          
+          <form id="newsletter-form" action="https://docs.google.com/forms/d/e/1FAIpQLScvUaL3CFu_qVOygWhnj-26OBWB550tDUqYLCNDUNQmgbMHCg/formResponse" method="POST">               
             <div class="bg-white border input-group p-1 rounded-pill">
-              <input type="email" id="email" name="email" class="border-0 form-control pe-3 ps-3 shadow-none" placeholder="Enter email..." aria-label="Recipient's email" aria-describedby="button-addon2" required/>
-              <button class="bg-gradient btn btn-primary pb-2 pe-4 ps-4 pt-2 rounded-pill" id="button-addon2" aria-label="submit">
+              <input type="email" id="emailAddress" name="emailAddress" class="border-0 form-control pe-3 ps-3 shadow-none" placeholder="Enter email..." aria-label="Recipient's email" aria-describedby="button-addon2" required/>
+               <button class="bg-gradient btn btn-primary pb-2 pe-4 ps-4 pt-2 rounded-pill" id="button-addon2" aria-label="submit">
                 Sign Up
 </button>
             </div>
@@ -90,26 +91,14 @@
       event.preventDefault();
       var status = document.getElementById("my-form-status");
       var data = new FormData(event.target);
-      console.log(data);
+
       fetch(event.target.action, {
         method: form.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
+        body: new URLSearchParams(data),
+        mode: 'no-cors'
+      }).then(() => {
           status.innerHTML = "Thanks for your submission!";
-          form.reset()
-        } else {
-          response.json().then(data => {
-            if (Object.hasOwn(data, 'errors')) {
-              status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-            } else {
-              status.innerHTML = "Oops! There was a problem submitting your form"
-            }
-          })
-        }
+          form.reset();
       }).catch(error => {
         status.innerHTML = "Oops! There was a problem submitting your form"
       });
