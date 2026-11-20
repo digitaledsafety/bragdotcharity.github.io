@@ -1,0 +1,1 @@
+> **No longer maintained.** This repository is no longer maintained. The live site is at https://brag.charity. Active development now happens in the [foundation monorepo on GitLab](https://gitlab.com/desf-group/foundation).
